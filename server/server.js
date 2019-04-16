@@ -22,6 +22,12 @@ gstore.connect(datastore);
 
 instances.set("00002", gstore);
 
+const {
+  listBuckets,
+  findBucketByName,
+  bucketExists
+} = require("./buckets/bucket");
+
 /* ROUTES */
 const users = require("./routes/api/users");
 
@@ -32,13 +38,6 @@ const port = process.env.PORT || 5555;
 /* BODY PARSER CONFIGURATIONS */
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-/* DB Config & Mongoose to Mongo connection */
-// const db = require("./config/keys").mongoURI;
-// mongoose
-//   .connect(db)
-//   .then(() => console.log("MongoDB connected Successfully!"))
-//   .catch(e => console.log(`Error while connecting to MongoDB ${e}`));
 
 /* POINTING PUBLIC FOLDER */
 const publicPath = path.join(__dirname, "..", "public");
