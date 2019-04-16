@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import DragnDrop from "../ui/DragnDrob";
 
 class Dashboard extends Component {
   render() {
@@ -13,6 +14,8 @@ class Dashboard extends Component {
           This is a private route, Can only be displayed and visited by logged
           in users.
         </p>
+
+        <DragnDrop />
       </div>
     );
   }
