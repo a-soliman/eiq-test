@@ -1,5 +1,6 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20");
+const { createBucket, bucketExists } = require("../buckets/bucket");
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const keys = require("../config/keys");
@@ -49,7 +50,16 @@ module.exports = passportGoogle => {
               user
                 .save()
                 .then(user => {
-                  if (user) return done(null, user);
+                  if (user) {
+                    /* CHECK IF A BUCKET WITH THIS USER ID EXISTS - or - CREATE ONE */
+                    bucketExists(newUser.id).then(bucket => {
+                      if (!bucket) {
+                        createBucket(newUser.id).then(() => {
+                          return done(null, user);
+                        });
+                      }
+                    });
+                  }
                 })
                 .catch(err => {
                   return done(null, false);

@@ -39,8 +39,14 @@ const bucketExists = name => {
   return storage
     .bucket(name)
     .get()
-    .then(bucket => true)
+    .then(bucket => bucket)
     .catch(err => false);
 };
 
-module.exports = { listBuckets, findBucketByName, bucketExists };
+const createBucket = name => {
+  return storage.createBucket(name).then(bucket => {
+    console.log("created bucked : ", name);
+  });
+};
+
+module.exports = { listBuckets, findBucketByName, bucketExists, createBucket };
