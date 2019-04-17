@@ -5,6 +5,7 @@ const storage = multer.memoryStorage(); // multer sotrage
 const upload = multer({ storage });
 const { hostFileInStorage } = require("../../buckets/bucket");
 const passport = require("passport");
+const File = require("../../models/File");
 
 router.post(
   "/",
@@ -28,18 +29,29 @@ router.post(
     // push the file to storage pocket,
     const fileNameInStorage = Date.now() + "__" + name;
     hostFileInStorage(userId, fileNameInStorage, stringContent);
-    // add the file metadata to the database
 
-    res.json({
+    // add the file metadata to the database
+    const fileMetaData = {
+      userId,
+      name,
+      size,
       rowsCount,
       colCount,
       isValid,
       errorRows,
       itemsCount,
       idealItemsCount,
-      name,
-      size
-    });
+      fileURL: `https://storage.googleapis.com/${userId}/${fileNameInStorage}`
+    };
+    let dSFile = new File(fileMetaData);
+    dSFile
+      .save()
+      .then(file => {
+        res.json(fileMetaData);
+      })
+      .catch(err =>
+        res.json({ error: "server error.", dataUnsaver: fileMetaData })
+      );
   }
 );
 
