@@ -49,4 +49,40 @@ const createBucket = name => {
   });
 };
 
-module.exports = { listBuckets, findBucketByName, bucketExists, createBucket };
+const hostFileInStorage = (bucketName, fileName, content) => {
+  const stream = require("stream"),
+    dataStream = new stream.PassThrough(),
+    gcFile = storage.bucket(bucketName).file(fileName);
+
+  dataStream.push(content);
+  dataStream.push(null);
+
+  return new Promise((resolve, reject) => {
+    dataStream
+      .pipe(
+        gcFile.createWriteStream({
+          resumable: false,
+          validation: false,
+          metadata: { "Cache-Control": "public, max-age=31536000" }
+        })
+      )
+      .on("error", error => {
+        reject(error);
+      })
+      .on("finish", () => {
+        storage
+          .bucket(bucketName)
+          .file(fileName)
+          .makePublic();
+        resolve(true);
+      });
+  });
+};
+
+module.exports = {
+  listBuckets,
+  findBucketByName,
+  bucketExists,
+  createBucket,
+  hostFileInStorage
+};

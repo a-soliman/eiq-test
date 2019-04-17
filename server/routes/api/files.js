@@ -3,6 +3,7 @@ const router = express.Router();
 const multer = require("multer");
 const storage = multer.memoryStorage(); // multer sotrage
 const upload = multer({ storage });
+const { hostFileInStorage } = require("../../buckets/bucket");
 const passport = require("passport");
 
 router.post(
@@ -25,6 +26,8 @@ router.post(
     } = getFileProperties(stringContent);
 
     // push the file to storage pocket,
+    const fileNameInStorage = Date.now() + "__" + name;
+    hostFileInStorage(userId, fileNameInStorage, stringContent);
     // add the file metadata to the database
 
     res.json({
