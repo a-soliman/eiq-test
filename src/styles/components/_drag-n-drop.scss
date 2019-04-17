@@ -1,9 +1,14 @@
 .drag-platform {
   align-items: center;
-  background: $off-white;
-  border: 1px dashed $grey;
+  background: #fff;
+  border: 1px dashed #d0d0d0;
   justify-content: center;
   display: flex;
   height: 100px;
   width: 100%;
+}
+
+.dragover {
+  background: $off-white;
+  border-color: $grey;
 }
