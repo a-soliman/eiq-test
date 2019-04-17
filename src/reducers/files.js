@@ -14,6 +14,12 @@ export default (state = initalState, action) => {
         files: action.payload
       };
 
+    case SEND_FILE:
+      return {
+        ...state,
+        files: [...state.files, action.payload]
+      };
+
     default:
       return state;
   }

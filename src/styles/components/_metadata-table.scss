@@ -1,0 +1,10 @@
+.metadata-table {
+}
+
+@media screen and (max-width: 800px) {
+  .metadata-table {
+    th {
+      font-size: $s-size;
+    }
+  }
+}

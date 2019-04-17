@@ -2,7 +2,6 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 const passport = require("passport");
-const fs = require("fs");
 const { Gstore, instances } = require("gstore-node");
 const { Datastore } = require("@google-cloud/datastore");
 

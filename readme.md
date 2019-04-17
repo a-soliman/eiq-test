@@ -1,8 +1,8 @@
-# MERN Stack Boilerplate
+# EIQ - Test
 
-## Node, Express, React, MongoDB
+## CSV Validator
 
-- Get your project started in no time with Node, Express, React, Redux, m-lab, Google Auth authentication, Passport local strategy authentication, Sass/SCSS styling, Mongoose Schemas, Jest & Enzyme unit testing, Heroku deployment and more.
+- Given a .CSV file, it should upload it to the server (in memory), then validate it, then store it into Google Cloud Storage, then store it's properties in google Cloud Platform, and responde with these properties ie (isValid, rowsCount, colsCount, itemsCount, idealItemsCount, fileSize, currentUserId, and a list of rows that contain issues).
 
 ### Technologies:
 
@@ -12,8 +12,8 @@
 - ExpressJS
 - PassportJS (Authentication)
 - OAuth2
-- JWT
-- bcryptjs (for hashing passwords)
+- JWT,
+- Multer
 
 #### Client Side
 
@@ -29,9 +29,8 @@
 
 #### Database
 
-- MongoDB
-- MongooseJS
-- m-Lab
+- GCP - Data Store
+- GCP - Cloud Storage
 
 #### Unit Test
 
@@ -51,28 +50,17 @@
 1. Install [Node](https://nodejs.org/en/)
 2. Clone this REPO
    ```
-   git clone https://github.com/a-soliman/MERN-boilerplate.git
+   git clone https://github.com/a-soliman/eiq-test.git
    ```
    ```
-   cd MERN-Boilerplate/
+   cd eiq-test/
    ```
 3. Install the required packges
    Run 'npm install' or 'npm i' to install the required packages.
    ```
    npm install
    ```
-4. Create and fill the keys file in /server/config/keys.js
-
-```
-module.exports = {
-  mongoURI: MONGODB DATABASE URL (LOCAL OR IN M-LAB),
-  secretOrKey: SECRET STRING,
-  googleClientId: GOOGLE CLIENT ID (FROM GOOGLE CONSOLE) FOR GOOGLE AUTHENTICATION,
-  googleClientSecret: GOOGLE CLIENT SECRET (FROM GOOGLE CONSOLE) FOR GOOGLE AUTHENTICATION,
-  googleCallbackURL: GOOGLE CALLBACK URL (FROM GOOGLE CONSOLE) FOR GOOGLE AUTHENTICATION,
-  defaultGooglePassword: SOME DUMMY PASSWORD HERE
-};
-```
+4. Place the attached keys files (data_store_keys.json & keys_dev.js) in this directory /server/config/
 
 ---
 
@@ -124,24 +112,3 @@ module.exports = {
    ```
 
 ---
-
-## API END-POINTS:
-
-### USERS : /api/users
-
-- POST /register
-- POST /login
-- GET /google
-- GET /google/redirect
-- GET /current
-
----
-
-## Third party Packages Usage Examples :
-
----
-
-## Next Steps:
-
-1. Add Node-mailer
-2. Add further 3rd party Authentication (Facebook, Twitter, Github, LinkedIn and Amazon).

@@ -7,6 +7,23 @@ const { hostFileInStorage } = require("../../buckets/bucket");
 const passport = require("passport");
 const File = require("../../models/File");
 
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { id: userId } = req.user.plain();
+    const query = File.query().filter("userId", "=", userId);
+    query
+      .run()
+      .then(files => {
+        res.json(files);
+      })
+      .catch(err => {
+        console.log("Error while fetching files' metadata");
+      });
+  }
+);
+
 router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
