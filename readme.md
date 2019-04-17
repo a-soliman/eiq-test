@@ -92,23 +92,3 @@
    ```
    npm run test
    ```
-
----
-
-### Deployment
-
-#### Heroku:
-
-- This boilerplate is configured to run at Heroku with no need for further configuration.
-
-1. Go through the traditional [Heroku-Cli setup](https://devcenter.heroku.com/articles/heroku-cli).
-2. At the root level of the project
-   ```
-   heroku create
-   ```
-3. push to Heroku
-   ```
-   git push heroku master
-   ```
-
----
